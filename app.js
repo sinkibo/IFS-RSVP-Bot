@@ -234,7 +234,7 @@ telegrafbot.on('callback_query', async (ctx) => {
 })
 
 // recive AP/Level/Trekker
-telegrafbot.hears(new RegExp(/\d{1,2},\d{1,},\d{1,2}/), async (ctx) => {
+telegrafbot.hears(new RegExp(/\d{1,2},\d{1,}/), async (ctx) => {
   try {
     let info = await API.checkpoc(ctx.message.from.id)
     await API.logaplevel(info.faction, info.location, (ctx.message.text.split(','))[0], (ctx.message.text.split(','))[1]， (ctx.message.text.split(','))[2], ctx.message.from.id)
