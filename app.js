@@ -24,7 +24,7 @@ telegrafbot.telegram.setWebhook(process.env.DOMAIN + process.env.RANDOM_ADDRESS)
 telegrafbot.command('start', async (ctx) => {
   try {
     let info = await API.checkpoc(ctx.message.from.id)
-    telegrambot.sendMessage(ctx.message.from.id, `欢迎你，${info.location} 场 ${info.faction} PoC。\n/checkin - 进行签到\n/checkout - 进行签退`, {parse_mode: "Markdown"})
+    telegrambot.sendMessage(ctx.message.from.id, `你好喵！，${info.location}场 ${info.faction} PoC。\n/checkin - 进行签到\n/checkout - 进行签退`, {parse_mode: "Markdown"})
   } catch (err) {
     telegrambot.sendMessage(ctx.message.from.id, err, {parse_mode: "Markdown"})
   }
@@ -142,7 +142,7 @@ telegrafbot.on('callback_query', async (ctx) => {
           ctx.update.callback_query.from.id,
           ctx.update.callback_query.message.message_id,
           null,
-          `请在消息框中写上 agent ${(ctx.update.callback_query.data.split(':'))[1]} 目前等级和 AP，以半角逗号 \`,\` 区隔。\n例如：\`16,40000000\`（大部分设备点击/长按示例可复制）`,
+          `请在消息框中写上 agent ${(ctx.update.callback_query.data.split(':'))[1]} 目前等级和 AP 以及步行距离，以半角逗号 \`,\` 区隔。\n例如：\`16,40000000,500\``,
           {
             parse_mode: 'Markdown'
           }
@@ -190,7 +190,7 @@ telegrafbot.on('callback_query', async (ctx) => {
           ctx.update.callback_query.from.id,
           ctx.update.callback_query.message.message_id,
           null,
-          `请在消息框中写上 agent ${(ctx.update.callback_query.data.split(':'))[1]} 目前等级和 AP，以半角逗号 \`,\` 区隔。\n例如：\`16,40000000\`（大部分设备点击/长按示例可复制）`,
+          `请在消息框中写上 agent ${(ctx.update.callback_query.data.split(':'))[1]} 目前等级和 AP 以及步行距离，以半角逗号 \`,\` 区隔。\n例如：\`16,40000000,500\``,
           {
             parse_mode: 'Markdown'
           }
