@@ -24,7 +24,8 @@ telegrafbot.telegram.setWebhook(process.env.DOMAIN + process.env.RANDOM_ADDRESS)
 telegrafbot.command('start', async (ctx) => {
   try {
     let info = await API.checkpoc(ctx.message.from.id)
-    telegrambot.sendMessage(ctx.message.from.id, `你好喵！，${info.location}场 ${info.faction} PoC。\n/checkin - 进行签到\n/checkout - 进行签退`, {parse_mode: "Markdown"})
+    //telegrambot.sendMessage(ctx.message.from.id, `你好喵！，${info.location}场 ${info.faction} PoC。\n/checkin - 进行签到\n/checkout - 进行签退`, {parse_mode: "Markdown"})
+    telegrambot.sendMessage(ctx.message.from.id, `你好喵！，${info.location}场PoC。\n/checkin - 进行签到\n/checkout - 进行签退`, {parse_mode: "Markdown"})
   } catch (err) {
     telegrambot.sendMessage(ctx.message.from.id, err, {parse_mode: "Markdown"})
   }
@@ -151,7 +152,7 @@ telegrafbot.on('callback_query', async (ctx) => {
         break
       }
       case 'checkedin': {
-        telegrambot.answerCbQuery(ctx.update.callback_query.id, `⚠️ 特工 ${(ctx.update.callback_query.data.split(':'))[1]} 已经完成签到。请选择一个不同的特工。`)
+        telegrambot.answerCbQuery(ctx.update.callback_query.id, `⚠️ 特工 ${(ctx.update.callback_query.data.split(':'))[1]} 已经完成签到。请选择一个不同的特工哦`)
         break
       }
       case 'findagent4out': {
@@ -199,11 +200,11 @@ telegrafbot.on('callback_query', async (ctx) => {
         break
       }
       case 'checkedout': {
-        telegrambot.answerCbQuery(ctx.update.callback_query.id, `⚠️ 特工 ${(ctx.update.callback_query.data.split(':'))[1]} 已经完成签退。请选择一个不同的特工。`)
+        telegrambot.answerCbQuery(ctx.update.callback_query.id, `⚠️ 特工 ${(ctx.update.callback_query.data.split(':'))[1]} 已经完成签退。请选择一个不同的特工哦`)
         break
       }
       case 'notin': {
-        telegrambot.answerCbQuery(ctx.update.callback_query.id, `⚠️ 特工 ${(ctx.update.callback_query.data.split(':'))[1]} 尚未进行签到，无法签退。`)
+        telegrambot.answerCbQuery(ctx.update.callback_query.id, `⚠️ 特工 ${(ctx.update.callback_query.data.split(':'))[1]} 尚未进行签到，无法签退哟`)
         break
       }
       default: {
@@ -238,7 +239,7 @@ telegrafbot.hears(new RegExp(/\d{1,2},\d{1,},/), async (ctx) => {
   try {
     let info = await API.checkpoc(ctx.message.from.id)
     await API.logaplevel(info.faction, info.location, (ctx.message.text.split(','))[0], (ctx.message.text.split(','))[1], (ctx.message.text.split(','))[2], ctx.message.from.id)
-    telegrambot.sendMessage(ctx.message.from.id, `签到/签退已完成。`, {parse_mode: "Markdown"})
+    telegrambot.sendMessage(ctx.message.from.id, `签到/签退已完成啦`, {parse_mode: "Markdown"})
   } catch (err) {
     telegrambot.sendMessage(ctx.message.from.id, err, {parse_mode: "Markdown"})
   }
