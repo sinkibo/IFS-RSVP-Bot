@@ -11,5 +11,5 @@ module.exports = async function (id) {
     }
     if (faction !== '') return { faction, location: ifs[i].location}
   }
-  throw `抱歉喵！，你没有权限使用本功能，请联系你所在阵营的 PoC 完成签到。希望你可以在 武汉IFS 8.0 玩得愉快！`
+  throw `抱歉喵！，你没有权限使用本功能，请联系你所在阵营的 PoC 完成签到。希望你可以在武汉IFS 8.0玩得愉快！`
 }
